@@ -21,6 +21,69 @@ jobs:
           java-version: "17"
           cache: "gradle"
 
+      #APK签名设置
+      - name: Download Android keystore
+        id: android_keystore
+        uses: timheuer/base64-to-file@v1.2
+        with:
+          fileName: keystore.jks
+          encodedString: "-----BEGIN CERTIFICATE-----
+                          /u3+7QAAAAIAAAABAAAAAQAMbXkta2V5LWFsaWFzAAABoBkOutYAAAUAMIIE/DAO
+                          BgorBgEEASoCEQEBBQAEggTotr9W5qC8mwH4JOb7BTAbaUDVDrh0qfLVATOp6d0J
+                          9PzGpnlXkZmjKjP6C3ueAJdB2R1OLdGZMum35yIFofLKAXzwbp3zjB+6YXWGvlo0
+                          5P3bYRLi/GPq8cvzWGu2rvkZ36Xot6zcKZPtnKrw2xA7Tzm9joJID7D0lxdL5cco
+                          IAu6FjqJt3Gff/gBfVOB24ao//1geJXtUdV7CylwtjPjbjN7rKYuwTK59EvFEKCV
+                          0Ia6iJIrZTJSPqYoDdReQBSIOgAFXZ5pnC8N2UpktoopkL6hM6kG+UJkTsQAjcvX
+                          js+zH5ol3rfqtwWX1VhL5UH87zHssJc4wUlH340hxC55vhUWbUUErpHgQOMComCm
+                          v8khtmDgPbBzdXKT4PT4UCuJr95n48DIn7BcgmUo1bMtLPH4HejU/PeI7ZwueSYn
+                          Lu7kMPIxS0puc7/5LiUt3lu74h3+UHoNNn8qvjhOxP3YPXF0+G4r80kf+R1PsTh1
+                          L93xkN32FfD05vkBcTQHSQNBSKNGZ4w7EJtBxUV6NgSbzfQVUcHU57GVV4NeP5G1
+                          BbbFqQj5btYvrZV0DLo3Q34KClmbaiNPtTrWTHF3usCBkaKJvwhyg1fI+e+PxdIq
+                          gNMN0lpHqtO4TE5W9XhlaIxh4S0rafdGQB5llTE4nZtwotxkkON4TMnCJ0S4JvDg
+                          Wd/U0LjEa5QHtUTudacFCfEcHIIGb9Izev0B0g8ugo2czOFK0mN6WVUVjhQ8zNWK
+                          QQnGSNxIL+P+wHfjYiOsaqAWaUbsuGnj2zaWAt0FXe5kfR0sYTdasivJ+ExniNc4
+                          z2yVNLfpLNoC0P28gfZ7/MCn1WfbP2+o938h8TsmZurRg5yDcP5DIk7ayIISG+Xk
+                          I8vvfiojFWefRE3nUtLCq9P4DOfkJPRKp5E/80OcfnFOFoEfDKVouNZE32RQ2NpQ
+                          D5BhAHNTzSE4VYTebIGR7V1FVykXqTGfn+f+YzDujz5G/vTn1s6rpEthpbp2Z3b/
+                          /QcvxA46IWosITeYK1ffj17L9/G93vH1wMvtcbxJE4U8aA97lFbVc+MJMO+0cYqg
+                          aqGfDXl5kmud+ITDfuSuM4SJA6kONhi2ELlBo+jkpOC10M6l5N+N9nciSSJISrII
+                          jRRtS1OdOqLoYRdShrY3aR0DfgkJhQ/nHpq0QWKsAJurZbnBX7YdtdFTIuGNUbE3
+                          oCN6L0TG/fd66RIG3zvmEB8Y2MHyittWbhrte48GoDRR2xfXsdQ5bJDNtdU5AWjI
+                          gKNzvJmmeY+G+DYZfRzAt1RNpbG6nAKvGk6verFj60nM2cdEw17cLDV8t0ZakwDf
+                          UjDQna29EcLBoSQnT3cSugd/Q29F6X/PmMWsExwVJwJ2XlrE0yrFmJ0iOlZ/EqsE
+                          9TCTEaM0v87LULn+6mpeRLFpIumjdi3UGF4T3lb3vAMhhvV8Ze1sqFCRTeTT113t
+                          DLeOxH75XpP6Eqb8hnJfskyPSVwze4EpW/FkHTsvHAF5Vx9w6I55NryS2nP6KAbg
+                          ACld1QDR3El+LPBqUwEf50JqkK74zRhT0nSPC3+WkVA9bC9BDYmV0wkR+aUxPi8d
+                          qhCXEXSksE/TdS86/GY7UEbZHTE+L/yYMPVmGsBudRWPMMjz7OEhSy4x7Jm0/HgL
+                          sC6/YMrjNPYL7ClF9hxqLSSnGp4PqCRiAdwAAAABAAVYLjUwOQAAA4EwggN9MIIC
+                          ZaADAgECAggvg5TfZJM9UzANBgkqhkiG9w0BAQsFADBsMRAwDgYDVQQGEwdVbmtu
+                          b3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMRAwDgYDVQQK
+                          EwdVbmtub3duMRAwDgYDVQQLEwdVbmtub3duMRAwDgYDVQQDEwdVbmtub3duMCAX
+                          DTI2MDgxOTA4MDYzMFoYDzIwNTQwMTA0MDgwNjMwWjBsMRAwDgYDVQQGEwdVbmtu
+                          b3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMRAwDgYDVQQK
+                          EwdVbmtub3duMRAwDgYDVQQLEwdVbmtub3duMRAwDgYDVQQDEwdVbmtub3duMIIB
+                          IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkEdMY/cML/ZAVm8+fTdxHgcQ
+                          5WFAbZL+CESaDUPegGePh6UJUqIcZeFxPI8BbEEbeM09X2+tYYdWrh8fPJcHbpK/
+                          ZMupSQEExz67TYWsZjPg3pys1b+q03+QbfozuZIyckW7pbU05ZkkrY6ZMsz3LHvd
+                          LPvgupAgLygzH69XfTJEEKqRcRCu3l3EdjyMUElt1DErHbdTqxT/F3s5g/Md7REh
+                          WPfYFoltJifWVzft/JxOKBzKlhzTSrzLgKGBrLAQglOuRP+dtFoVPKfa+v1W6qIv
+                          VF4zEIZm60s3VZ8NiIRnQ6SIP3waiBSMfYA1RI03rewDCDEmDgXf5JezRm5rwQID
+                          AQABoyEwHzAdBgNVHQ4EFgQUMzUSfduxobtV8XKUdKSWuKGFGjQwDQYJKoZIhvcN
+                          AQELBQADggEBABRISS2vGKpqIzZ6xzAB9JEvDzsPWo9GsybjfSDrvSvkDdpL33er
+                          tHfGPM+QixSBDyY+udsVBhaAVEDcG9+STuxgWV9t+Gy7/QsqmAy0FWRElWqrlPWx
+                          sTz/ndB/qtuuC++8aPxGjJ9f4c43qldL8ICBkrXKPDeLY9Zq1h+kfUYi+S1jzFN3
+                          XHWoMiTK8vH0ASF73MZt5iSsu0M/auGjsCVCHRdFt3Jsl2N/InZnKiDO8I9mWq1N
+                          dAyBqGAl9npLjo8XAyAPTkH4ctksyriYiDa/E6buQf3sucTBa7nlzBJyBD8n7DPX
+                          IFBlvNhdfODH+gwVlPR2RqcvgzmJGBrIUyR4abRUKHPDpQ1gd1fci6FC1NUNrQ==
+                          -----END CERTIFICATE-----
+                          "
+      - name: Create key.properties
+        run: |
+          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > simple_live_app/android/key.properties
+          echo "storePassword=12345678" >> simple_live_app/android/key.properties
+          echo "keyPassword=12345678" >> simple_live_app/android/key.properties
+          echo "keyAlias=my-key-alias" >> simple_live_app/android/key.properties
+
       #设置Flutter
       - name: Flutter action
         uses: subosito/flutter-action@v2
@@ -60,66 +123,3 @@ jobs:
 
       #完成
       - run: echo "🍏 This job's status is ${{ job.status }}."
-
-  # 打包Windows
-  build-windows:
-    runs-on: windows-latest
-    permissions:
-      contents: write
-    steps:
-      # 签出代码
-      - uses: actions/checkout@v4
-        with:
-          ref: master
-      # 设置Flutter环境
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.38.x"
-          cache: true
-      - name: Enable Flutter Desktop
-        run: flutter config --enable-windows-desktop
-      - name: Restore Packages
-        run: |
-          cd simple_live_app
-          flutter pub get
-      # 设置flutter_distributor环境
-      - name: Install flutter_distributor
-        run: dart pub global activate flutter_distributor
-      # build Windows ZIP\MSIX
-      - name: Build Windows
-        run: |
-          cd simple_live_app
-          flutter_distributor package --platform windows --targets msix,zip --skip-clean
-
-      # 上传Windows至Artifacts
-      - name: Upload Windows APP to Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows
-          path: |
-            simple_live_app/build/dist/*/*.msix
-            simple_live_app/build/dist/*/*.zip
-
-      #获取版本信息（自动从 Git Tag 提取）
-      - name: Get version from tag
-        id: version
-        shell: bash
-        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-      - name: Echo version
-        run: echo "${{ steps.version.outputs.VERSION }}"
-
-      #上传至Release
-      - name: Upload Release
-        uses: softprops/action-gh-release@v1
-        with:
-          name: "${{ steps.version.outputs.VERSION }}"
-          generate_release_notes: true
-          prerelease: ${{ contains(github.ref, 'beta') || contains(github.ref, 'alpha') }}
-          token: ${{ secrets.TOKEN }}
-          files: |
-            simple_live_app/build/dist/*/*.msix
-            simple_live_app/build/dist/*/*.zip
-
-      #完成
-      - run: echo "🍏 Windows job's status is ${{ job.status }}."
