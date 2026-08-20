@@ -194,7 +194,7 @@ class MyApp extends StatelessWidget {
         darkTheme: AppStyle.darkTheme.copyWith(colorScheme: darkColorScheme),
         themeMode:
             ThemeMode.values[Get.find<AppSettingsController>().themeMode.value],
-        initialRoute: RoutePath.kIndex,
+        initialRoute: RoutePath.kFollowUser,
         getPages: AppPages.routes,
         //国际化
         locale: const Locale("zh", "CN"),
