@@ -16,7 +16,7 @@ import 'package:simple_live_app/modules/mine/mine_page.dart';
 class IndexedController extends GetxController {
   RxList<HomePageItem> items = RxList<HomePageItem>([]);
 
-  var index = 0.obs;
+  var index = 1.obs;
   RxList<Widget> pages = RxList<Widget>([
     const SizedBox(),
     const SizedBox(),
@@ -69,6 +69,6 @@ class IndexedController extends GetxController {
     if (settingsController.firstRun) {
       settingsController.setNoFirstRun();
       await Utils.showStatement();
-    } 
+    }
   }
 }
