@@ -58,9 +58,9 @@ class AppSettingsController extends GetxController {
     );
 
     qualityLevel.value = LocalStorageService.instance
-        .getValue(LocalStorageService.kQualityLevel, 1);
+        .getValue(LocalStorageService.kQualityLevel, 0);
     qualityLevelCellular.value = LocalStorageService.instance
-        .getValue(LocalStorageService.kQualityLevelCellular, 1);
+        .getValue(LocalStorageService.kQualityLevelCellular, 0);
 
     autoExitEnable.value = LocalStorageService.instance
         .getValue(LocalStorageService.kAutoExitEnable, false);
