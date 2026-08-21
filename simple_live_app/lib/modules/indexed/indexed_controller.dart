@@ -16,7 +16,7 @@ import 'package:simple_live_app/modules/mine/mine_page.dart';
 class IndexedController extends GetxController {
   RxList<HomePageItem> items = RxList<HomePageItem>([]);
 
-  var index = 1.obs;
+  var index = 0.obs;
   RxList<Widget> pages = RxList<Widget>([
     const SizedBox(),
     const SizedBox(),
@@ -60,7 +60,7 @@ class IndexedController extends GetxController {
     items.value = AppSettingsController.instance.homeSort
         .map((key) => Constant.allHomePages[key]!)
         .toList();
-    setIndex(0);
+    setIndex(1);
     super.onInit();
   }
 
